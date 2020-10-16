@@ -1,0 +1,66 @@
+git clone -b starter-code https://github.com/dappuniversity/blockchain_game blochchain_game
+
+•npm install
+
+//start a server for the client application, the rest is going to be on the blockchain
+• npm run start
+
+//open visual.code
+//this is where configure project to talk to the blockchain
+truffle-config.js
+
+//contracts
+//let's give a contract name 
+
+//second, tells truffle that we put something into the blockchain, trought migrations/2_deploy_contracts.js that is a file that tells truffle had to move contract our of the blockchain (looks like a database , changing the state to another or maybe that you have to move data to another)
+deployer.deploy(MemoryToken);
+
+//third, run truffle migrate --reset (reset in case that any other contract that exist in build directory)
+//remember that smartcontracts are immutable, they can't change when you update the code under development you have to put new copies into the blockchain, that the reason about reset
+• truffle migrate --reset
+
+//now "truffle console" to a javascript console so is able to interact with the blockchain directly
+• truffle console
+//await because to interacts and get the value from the blockchain must to be async, otherwise it would only return the promise not the actual token itself
+• token = await MemoryToken.deployed()
+• token
+• token.adress
+• name = await token.name()
+• name
+• .exit
+
+//lets keep building https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/ERC721.sol template / standard interface 
+
+Memory Token Contract, and inherits the ERC721Full
+
+lets test: MemoryToken.test.js
+
+• truffle test
+
+//after building some tests (important because blockchain is immutable)
+//It's time to build the fron-end
+
+
+
+//Letting the webapp working on the blockchain with web3
+//Not necessary to code all the time because it's "always" the same
+
+---------------------------------
+async loadWeb3 () {
+    if (window.ethereum) {
+      window.web3 = new Web3(window.ethereum)
+      await window.ethereum.enable()
+    }
+    else if (window.web3) {
+      window.web3 = new Web3(window.web3.currentProvider)
+    }
+    else {
+      window.alert('Non-Ethereum browser detected. You should consider trying Metamask!')
+    }
+  }
+  -------------------------------
+
+
+  //Tutorial from:
+  https://www.youtube.com/watch?v=x-6ruqmNS3o
+  - Greg dappuniversity
